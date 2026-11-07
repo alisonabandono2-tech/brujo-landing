@@ -10,7 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700;800&family=Manrope:wght@300;400;600&display=swap">
 
+<link rel="stylesheet" href="/assets/consent.css">
 <script src="/assets/tracking.js" defer></script>
+<script src="/assets/consent.js" defer></script>
 
 <style>
 :root{
@@ -145,6 +147,7 @@ var CHANNEL_URL = 'https://whatsapp.com/channel/0029Vb8szBl5a23v0i0fiK1O';
     btn.addEventListener('click', function (ev) {
       if (!CHANNEL_URL) { ev.preventDefault(); return; }
       // Meta Pixel + CAPI are handled together by assets/tracking.js after consent.
+      if (!window.brujoHasTrackingConsent || !window.brujoHasTrackingConsent()) return;
       campaign.pais = window.BRUJO_PAIS;
       try { if (typeof gtag === 'function') gtag('event', 'generate_lead', campaign); } catch (e) {}
       try { if (window.dataLayer) dataLayer.push(Object.assign({ event: 'whatsapp_click' }, campaign)); } catch (e) {}

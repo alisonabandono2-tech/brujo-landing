@@ -1,1 +1,19 @@
-{"name":"brujo-landing","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node --test tests/*.test.mjs"},"engines":{"node":">=22"},"dependencies":{"@netlify/blobs":"^10.0.0"}}
+{
+  "name": "brujo-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "npm run build && node tests/consent.browser.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^10.0.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.0"
+  }
+}
