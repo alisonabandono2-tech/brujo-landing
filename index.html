@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BRUJO DEL PARLAY | 38 días sin perder</title>
+<meta name="description" content="Pronósticos de fútbol con cuotas decimales. Entra al canal de BRUJO DEL PARLAY en WhatsApp.">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700;800&family=Manrope:wght@300;400;600&display=swap">
+
+<!-- =========================================================
+     PIXEL DA META (opcional): cole aqui o código do SEU pixel.
+     Não há nenhum pixel instalado neste arquivo.
+     ========================================================= -->
+
+<style>
+:root{
+  --bg:#000; --card:rgba(255,255,255,.11); --text:#fff; --muted:#d9d9d9;
+  --topbar:#1AF39A; --topbar-ink:#04140C; --btn:#119C13; --btn-hover:#14B416;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;font-weight:300}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));background:var(--topbar);color:var(--topbar-ink);font-family:'Sora',sans-serif;font-weight:700;font-size:12px;letter-spacing:.02em}
+.age{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border:2px solid currentColor;border-radius:50%;font-size:9px;font-weight:800}
+.page{min-height:100vh;padding:120px max(55px,env(safe-area-inset-right,0px)) 55px max(55px,env(safe-area-inset-left,0px))}
+.inner{max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.card{display:flex;flex-direction:column;align-items:center;gap:14px;padding:30px;background:var(--card);border-radius:18px;text-align:center}
+.chk{display:block;overflow:visible}
+.chk .c-shadow,.chk .c-line,.chk .c-pop{transform-origin:260px 260px}
+.chk .c-ring{stroke-dasharray:696.2;stroke-dashoffset:696.2;animation:chkRing 3s cubic-bezier(.33,0,.67,1) infinite}
+.chk .c-pop{animation:chkPop 3s linear infinite}
+.chk .c-main{animation:chkFade 3s cubic-bezier(.33,0,.67,1) infinite}
+.chk .c-tick{stroke-dasharray:155;stroke-dashoffset:155;animation:chkTick 3s infinite}
+.chk .c-shadow{opacity:0;animation:chkShadow 3s linear infinite}
+.chk .c-line{opacity:0;animation:chkLine 3s linear infinite}
+@keyframes chkRing{0%{stroke-dashoffset:696.2;fill-opacity:0}30.56%{fill-opacity:0}33.33%,100%{stroke-dashoffset:0;fill-opacity:1}}
+@keyframes chkPop{0%,25%{transform:scale(1)}27.78%{transform:scale(1.08)}30.56%{transform:scale(.92)}33.33%,100%{transform:scale(1)}}
+@keyframes chkFade{0%,69.44%{opacity:1}86.11%,100%{opacity:0}}
+@keyframes chkTick{0%,33.33%{stroke-dashoffset:155;animation-timing-function:cubic-bezier(0,0,.67,1)}50%,100%{stroke-dashoffset:0}}
+@keyframes chkShadow{0%,30.56%{opacity:0;transform:scale(.6)}45.83%{opacity:1;transform:scale(.8)}61.11%,100%{opacity:0;transform:scale(1)}}
+@keyframes chkLine{0%,38.89%{opacity:0;transform:scale(.46)}54.17%{opacity:1;transform:scale(.73)}69.44%,100%{opacity:0;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.chk .c-ring{animation:none;stroke-dashoffset:0;fill-opacity:1}.chk .c-tick{animation:none;stroke-dashoffset:0}.chk .c-main,.chk .c-pop{animation:none}.chk .c-shadow,.chk .c-line{animation:none;opacity:0}}
+h1{margin:0;font-family:'Sora',sans-serif;font-weight:700;font-size:38px;line-height:1.15}
+.sub{margin:0;font-family:'Sora',sans-serif;font-weight:500;font-size:20px;line-height:1.4;color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:6px;padding:12px 24px;background:var(--btn);color:#fff;font-family:'Sora',sans-serif;font-weight:800;font-size:21px;text-decoration:none;border-radius:3px}
+.btn:hover{background:var(--btn-hover)}
+.btn:focus-visible{outline:3px solid var(--topbar);outline-offset:3px}
+.streak{display:flex;align-items:center;gap:14px;margin:4px 0;padding:14px 22px;border:1px solid rgba(26,243,154,.35);border-radius:14px;background:rgba(0,0,0,.35)}
+.num{font-family:'Sora',sans-serif;font-weight:800;font-size:64px;line-height:1;color:#1AF39A;font-variant-numeric:tabular-nums}
+.lbl{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;line-height:1.25;text-align:left}
+.btn{gap:10px;white-space:nowrap;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(46,230,107,.85),0 0 18px 2px rgba(46,230,107,.45)}45%{transform:scale(1.035);box-shadow:0 0 0 12px rgba(46,230,107,.25),0 0 28px 6px rgba(46,230,107,.6)}75%{transform:scale(1);box-shadow:0 0 0 22px rgba(46,230,107,0),0 0 18px 2px rgba(46,230,107,.45)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(46,230,107,0),0 0 18px 2px rgba(46,230,107,.45)}}
+.micro{margin:0;font-size:14px;color:var(--muted)}
+.proof{margin:0;font-size:12px;color:#9a9a9a}
+@media (prefers-reduced-motion:reduce){.btn{animation:none}}
+.disclaimer{margin:0;font-family:'Sora',sans-serif;font-weight:500;font-size:11px;line-height:1.5;color:#fff;text-align:center}
+.legal{margin:0;font-size:12px;line-height:1.5;color:var(--muted);text-align:center}
+@media (max-width:600px){
+  .page{padding:96px max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px))}
+  .card{padding:28px 18px}
+  .chk{width:84px;height:84px}
+  h1{font-size:30px}
+  .sub{font-size:17px}
+  .btn{width:100%;padding:16px 14px;gap:8px;font-size:clamp(13px, calc((100vw - 124px) / 14.6), 18px)}
+  .btn svg{width:20px;height:20px}
+  .num{font-size:52px}
+  .lbl{font-size:16px}
+  .streak{padding:12px 18px}
+}
+</style>
+</head>
+<body>
+<div class="topbar" role="note"><span class="age" aria-hidden="true">+18</span><span data-t="top">JUEGA CON RESPONSABILIDAD</span></div>
+
+<main class="page">
+  <div class="inner">
+    <div class="card">
+      <svg class="chk" viewBox="0 0 520 520" width="100" height="100" aria-hidden="true"><circle class="c-shadow" cx="260" cy="260" r="171.6" fill="#F3FFFB"></circle><circle class="c-line" cx="260" cy="260" r="217.6" fill="none" stroke="#F0FCF8" stroke-width="2"></circle><g class="c-main"><g class="c-pop"><circle class="c-ring" cx="260" cy="260" r="110.8" fill="#2FCB82" fill-opacity="0" stroke="#2FCB82" stroke-width="12.4" stroke-linecap="round" transform="rotate(-90 260 260)"></circle></g><path class="c-tick" d="M202.2 259.5L239.5 296.8L311.7 224.6" fill="none" stroke="#fff" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
+      <h1>¡Grupo liberado!</h1>
+      <div class="streak"><span class="num js-racha">38</span><span class="lbl">días seguidos<br>sin una apuesta perdida</span></div>
+      <p class="sub" data-t="sub">Entra ya y recibe los próximos pronósticos directo en tu WhatsApp</p>
+      <a id="button-GL" class="btn js-channel" href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.4 18.6z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-.8.8a3.5 3.5 0 0 1-2-2l.8-.8-1-2z"></path></svg>QUIERO ENTRAR AL GRUPO</a>
+      <p class="micro" data-t="micro">Entras en un toque y sin registro</p>
+      <p class="proof">Racha registrada en el canal, sin garantía de resultados futuros</p>
+    </div>
+
+    <p class="disclaimer">Este sitio no forma parte de Facebook ni de Meta Platforms Inc y no está respaldado por ellos de ninguna manera, Facebook es una marca registrada de Meta Platforms Inc</p>
+    <p class="legal">Solo para mayores de 18 años<br><span data-t="legal">Apostar implica riesgo de pérdida y no hay ganancias garantizadas</span></p>
+  </div>
+</main>
+
+<script>
+/* =========================================================
+   IDIOMA POR PAÍS — detecta pelo fuso do celular ou ?pais=ar|uy|co|cl|es
+   ========================================================= */
+(function () {
+  var COPY = {
+    neutral: { lang: 'es',    top: 'JUEGA CON RESPONSABILIDAD', sub: 'Entra ya y recibe los próximos pronósticos directo en tu WhatsApp', micro: 'Entras en un toque y sin registro', legal: 'Apostar implica riesgo de pérdida y no hay ganancias garantizadas' },
+    ar:      { lang: 'es-AR', top: 'JUGÁ CON RESPONSABILIDAD',  sub: 'Entrá ya y recibí los próximos pronósticos directo en tu WhatsApp', micro: 'Entrás en un toque y sin registro', legal: 'Apostar implica riesgo de pérdida y no hay ganancias garantizadas' },
+    uy:      { lang: 'es-UY', top: 'JUGÁ CON RESPONSABILIDAD',  sub: 'Entrá ya y recibí los próximos pronósticos directo en tu WhatsApp', micro: 'Entrás en un toque y sin registro', legal: 'Apostar implica riesgo de pérdida y no hay ganancias garantizadas' },
+    co:      { lang: 'es-CO', top: 'JUEGA CON RESPONSABILIDAD', sub: 'Entra de una y recibe los próximos pronósticos directo en tu WhatsApp', micro: 'Entras en un toque y sin registro', legal: 'Apostar implica riesgo de pérdida y no hay ganancias garantizadas' },
+    cl:      { lang: 'es-CL', top: 'JUEGA CON RESPONSABILIDAD', sub: 'Entra altiro y recibe los próximos pronósticos directo en tu WhatsApp', micro: 'Entras en un toque y sin registro', legal: 'Apostar implica riesgo de pérdida y no hay ganancias garantizadas' },
+    es:      { lang: 'es-ES', top: 'JUEGA CON RESPONSABILIDAD', sub: 'Entra ya y recibe los próximos pronósticos directo en tu WhatsApp', micro: 'Entras en un toque y sin registro', legal: 'Apostar implica riesgo de pérdida y no hay ganancias garantizadas' }
+  };
+  var TZ = { 'America/Montevideo': 'uy', 'America/Bogota': 'co', 'America/Santiago': 'cl', 'America/Punta_Arenas': 'cl', 'Pacific/Easter': 'cl', 'Europe/Madrid': 'es', 'Atlantic/Canary': 'es', 'Africa/Ceuta': 'es' };
+  var pais = null;
+  try { pais = (new URLSearchParams(location.search).get('pais') || '').toLowerCase(); } catch (e) {}
+  if (!COPY[pais]) {
+    pais = 'neutral';
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      if (tz.indexOf('America/Argentina') === 0 || tz === 'America/Buenos_Aires') pais = 'ar';
+      else if (TZ[tz]) pais = TZ[tz];
+    } catch (e) {}
+  }
+  var c = COPY[pais];
+  document.documentElement.lang = c.lang;
+  document.querySelectorAll('[data-t]').forEach(function (el) { var k = el.getAttribute('data-t'); if (c[k]) el.textContent = c[k]; });
+  window.BRUJO_PAIS = pais;
+})();
+
+/* =========================================================
+   CONFIGURAÇÃO ÚNICA — cole aqui o link oficial do canal.
+   Exemplo de formato: https://whatsapp.com/channel/CODIGO
+   ========================================================= */
+/* Dias da sequência atual — atualize aqui quando mudar. */
+var RACHA_DIAS = 38;
+
+var CHANNEL_URL = 'https://whatsapp.com/channel/0029Vb8szBl5a23v0i0fiK1O';
+
+(function () {
+  document.querySelectorAll('.js-racha').forEach(function (el) { el.textContent = RACHA_DIAS; });
+  var campaign = {};
+  try {
+    new URLSearchParams(location.search).forEach(function (v, k) {
+      if (/^utm_/.test(k) || k === 'fbclid' || k === 'gclid' || k === 'ttclid') campaign[k] = v;
+    });
+  } catch (e) {}
+
+  if (!CHANNEL_URL) console.warn('[BRUJO DEL PARLAY] Pendente: defina CHANNEL_URL com o link oficial do canal.');
+
+  document.querySelectorAll('.js-channel').forEach(function (btn) {
+    if (CHANNEL_URL) btn.href = CHANNEL_URL;
+    btn.addEventListener('click', function (ev) {
+      if (!CHANNEL_URL) { ev.preventDefault(); return; }
+      // Igual à referência: dispara "Lead" se o seu pixel estiver instalado.
+      campaign.pais = window.BRUJO_PAIS;
+      try { if (typeof fbq === 'function') fbq('track', 'Lead', campaign); } catch (e) {}
+      try { if (typeof gtag === 'function') gtag('event', 'generate_lead', campaign); } catch (e) {}
+      try { if (window.dataLayer) dataLayer.push(Object.assign({ event: 'whatsapp_click' }, campaign)); } catch (e) {}
+    });
+  });
+})();
+</script>
+</body>
+</html>
