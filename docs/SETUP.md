@@ -73,3 +73,14 @@ FTD NÃO é enviado para a Meta nesta implementação. O relatório contém `att
 6. Concilie o resultado com a 1win. Revise variáveis de produção e fluxo de consentimento. Só então autorize o merge do PR. Retire/ignore o código de teste na configuração de produção.
 
 Testes automatizados mockam Meta/Blobs e NÃO comprovam credenciais, ingestão real Meta, encaminhamento 1win ou deploy Netlify. A validação ao vivo deve ser registrada no PR.
+
+## Integração com o painel Parlay Track (relatório v2)
+Depois de consentimento e confirmação pela Meta, PageView/Lead também são persistidos em Netlify Blobs, em store separado do financeiro (brujo-landing-production). Cada registro guarda somente event_id, visit_id anônimo da página, tipo, país fornecido pelo contexto Netlify, horário e IDs UTM de campanha/conjunto/anúncio. Cookies de publicidade, fbclid, IP e user agent NÃO são persistidos nesses registros. Reenvios deduplicam por evento. Se a Meta aceitar mas a gravação falhar, a CAPI retorna 503 para permitir reenvio com o mesmo ID.
+
+O endpoint report agora retorna schema_version:2 e landing_events, mantendo events/groups de canal da 1win. Os eventos antigos de aquisição não podem ser reconstruídos; só os novos, após essa implantação, serão gravados. Mantenha o limite de 10 mil registros por store/consulta: reduza o período para volumes maiores.
+
+No painel privado Parlay Track, abra Preparar campanha e cole o TRACKING_REPORT_TOKEN no campo de senha. O painel testa o endpoint fixo de produção, guarda a credencial criptografada e importa visitas/Leads separadamente das conversões por sub1. Ele não usa META_CAPI_TOKEN nem ONEWIN_POSTBACK_SECRET. Relatórios v1 continuam aceitos para a 1win, com aviso de aquisição indisponível até atualizar a landing. Sincronização é manual pelo período escolhido; não há agendamento automático.
+
+As UTMs fornecidas pelo painel são: utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}. A Meta substitui as macros ao veicular o anúncio. Um acesso manual com macros não expandidas não é uma atribuição válida. Não coloque dados pessoais nas UTMs. O país é medido pelo Netlify; BRUJO_PAIS e o fuso do aparelho não são usados como prova de localização.
+
+O painel não soma FTDs de canal a anúncios da Meta. Custos continuam exigindo conexão ads_read ou CSV; a credencial CAPI não autoriza consultar gastos. O token de relatório concede leitura dos registros normalizados, portanto mantenha-o apenas no campo protegido e nos ambientes de servidor.
