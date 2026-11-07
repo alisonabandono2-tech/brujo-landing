@@ -1,0 +1,14 @@
+(function(){
+'use strict';
+var consent=false,config=null,pixelReady=false,queue=[],running=false,clickFbc=null,epoch=0;
+function cookie(name){var match=document.cookie.match(new RegExp('(?:^|; )'+name+'=([^;]*)'));try{return match?decodeURIComponent(match[1]):null}catch(e){return null}}
+function loadPixel(id){if(pixelReady){window.fbq('consent','grant');return;}if(!window.fbq){var n=window.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!window._fbq)window._fbq=n;n.push=n;n.loaded=true;n.version='2.0';n.queue=[];var s=document.createElement('script');s.async=true;s.src='https://connect.facebook.net/en_US/fbevents.js';document.head.appendChild(s)}window.fbq('consent','grant');window.fbq('init',id);pixelReady=true}
+function matching(){var fbp=cookie('_fbp'),fbc=cookie('_fbc')||clickFbc;if(!fbc){var fbclid=new URLSearchParams(location.search).get('fbclid');if(fbclid&&/^[a-zA-Z0-9_-]{1,350}$/.test(fbclid))fbc='fb.1.'+Date.now()+'.'+fbclid}if(fbc)clickFbc=fbc;return {fbp:fbp,fbc:fbc}}
+function track(name){if(!consent||!config||!config.pixelId)return;var id=crypto.randomUUID(),m=matching();var event={event_name:name,event_id:id,event_time:Math.floor(Date.now()/1000),event_source_url:location.origin+location.pathname,consent:true,fbp:m.fbp,fbc:m.fbc};window.fbq('track',name,{}, {eventID:id});if(config.capiConfigured){queue.push(event);flush()}}
+async function flush(){if(running)return;running=true;try{while(queue.length&&consent){var e=queue.shift();try{var response=await fetch('/.netlify/functions/capi',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(e),keepalive:true,credentials:'same-origin'});if(!response.ok&&response.status>=500){await fetch('/.netlify/functions/capi',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(e),keepalive:true,credentials:'same-origin'})}}catch(err){/* No cookies or tokens are logged. Pixel can still deliver its event. */}}}finally{running=false}}
+window.brujoSetTrackingConsent=async function(granted){if(granted!==true){epoch++;consent=false;queue=[];if(window.fbq)window.fbq('consent','revoke');return}if(consent)return;consent=true;var generation=++epoch;try{var response=await fetch('/.netlify/functions/tracking-config',{cache:'no-store'});if(!response.ok)throw Error();config=await response.json();if(!consent||generation!==epoch||!config.pixelId)return;loadPixel(config.pixelId);track('PageView')}catch(e){config=null;consent=false}};
+document.addEventListener('click',function(e){var btn=e.target.closest('.js-channel');if(btn)track('Lead')},true);
+window.addEventListener('brujo:consent',function(e){window.brujoSetTrackingConsent(e.detail===true)});
+// Your consent manager must call the public hook. No visual elements or implicit opt-in are added.
+if(window.BRUJO_TRACKING_CONSENT===true)window.brujoSetTrackingConsent(true);
+})();
