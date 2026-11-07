@@ -1,5 +1,5 @@
 import {isIP} from 'node:net';
-import {reply,validId} from './lib/http.mjs';
+import {reply,validId,runtimeEnv} from './lib/http.mjs';
 export function createHandler({env=process.env,send=fetch,clock=()=>Date.now()}={}){return async function(request,context={}){
  if(request.method!=='POST')return reply({error:'method_not_allowed'},405);
  if(request.headers.get('origin')!==new URL(request.url).origin)return reply({error:'origin_denied'},403);
@@ -15,7 +15,7 @@ export function createHandler({env=process.env,send=fetch,clock=()=>Date.now()}=
  if(!userData.client_ip_address&&!userData.fbc&&!userData.fbp)return reply({error:'matching_data_unavailable'},422);
  const event={event_name:data.event_name,event_id:data.event_id,event_time:eventTime,action_source:'website',event_source_url:source.href,user_data:userData};
  // Lead here means click on the WhatsApp CTA. No GroupJoin, registration or FTD is claimed.
- const payload={data:[event]};if(env.CONTEXT!=='production'&&env.META_TEST_EVENT_CODE)payload.test_event_code=env.META_TEST_EVENT_CODE;
+ const payload={data:[event]};if(runtimeEnv(env,context).CONTEXT!=='production'&&env.META_TEST_EVENT_CODE)payload.test_event_code=env.META_TEST_EVENT_CODE;
  try{const response=await send('https://graph.facebook.com/'+version+'/'+pixel+'/events',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+token},body:JSON.stringify(payload),signal:AbortSignal.timeout(8000)});const result=await response.json();if(!response.ok||result.error||result.events_received!==1)return reply({error:'meta_rejected_event'},502);return reply({ok:true,event_id:data.event_id})}catch{return reply({error:'meta_unavailable'},502)}
 }}
 export default createHandler();

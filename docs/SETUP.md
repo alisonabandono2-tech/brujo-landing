@@ -14,7 +14,7 @@ Em Project configuration → Environment variables, cadastre com escopo Function
 | ONEWIN_POSTBACK_SECRET | Segredo aleatório, pelo menos 32 caracteres, para autenticar callbacks da 1win. |
 | TRACKING_REPORT_TOKEN | Outro segredo aleatório de pelo menos 32 caracteres, para consultar o relatório por Bearer token. |
 
-Faça um novo deploy após configurar as variáveis. Ausência de credenciais não gera sucesso falso. Não são necessários siteID/token de Blobs no código: a função usa o contexto fornecido pelo Netlify. Confirme a disponibilidade de Netlify Blobs na conta. Os nomes dos stores separam produção de cada preview.
+Faça um novo deploy após configurar as variáveis. Ausência de credenciais não gera sucesso falso. Não são necessários siteID/token de Blobs no código: a função usa o contexto fornecido pelo Netlify. Confirme a disponibilidade de Netlify Blobs na conta. Os nomes dos stores separam produção de cada preview usando context.deploy.context/id fornecidos pelo Netlify (com fallback para variáveis apenas em testes locais).
 
 ## Consentimento, sem alteração de visual
 Não foi adicionado um banner nem um opt-in implícito. Conecte seu gerenciador de consentimento ao gancho:
