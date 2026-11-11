@@ -1,6 +1,7 @@
+import {saveLanding} from './lib/landing-store.mjs';
 import {isIP} from 'node:net';
 import {reply,validId,runtimeEnv} from './lib/http.mjs';
-export function createHandler({env=process.env,send=fetch,clock=()=>Date.now()}={}){return async function(request,context={}){
+export function createHandler({env=process.env,send=fetch,record=saveLanding,clock=()=>Date.now()}={}){return async function(request,context={}){
  if(request.method!=='POST')return reply({error:'method_not_allowed'},405);
  if(request.headers.get('origin')!==new URL(request.url).origin)return reply({error:'origin_denied'},403);
  const pixel=env.META_PIXEL_ID||'',token=env.META_CAPI_TOKEN,version=env.META_GRAPH_VERSION||'v25.0';if(!/^\d{5,30}$/.test(pixel)||!token||!/^v\d+\.\d+$/.test(version))return reply({error:'meta_not_configured'},503);
@@ -16,6 +17,6 @@ export function createHandler({env=process.env,send=fetch,clock=()=>Date.now()}=
  const event={event_name:data.event_name,event_id:data.event_id,event_time:eventTime,action_source:'website',event_source_url:source.href,user_data:userData};
  // Lead here means click on the WhatsApp CTA. No GroupJoin, registration or FTD is claimed.
  const payload={data:[event]};if(runtimeEnv(env,context).CONTEXT!=='production'&&env.META_TEST_EVENT_CODE)payload.test_event_code=env.META_TEST_EVENT_CODE;
- try{const response=await send('https://graph.facebook.com/'+version+'/'+pixel+'/events',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+token},body:JSON.stringify(payload),signal:AbortSignal.timeout(8000)});const result=await response.json();if(!response.ok||result.error||result.events_received!==1)return reply({error:'meta_rejected_event'},502);return reply({ok:true,event_id:data.event_id})}catch{return reply({error:'meta_unavailable'},502)}
+ try{const response=await send('https://graph.facebook.com/'+version+'/'+pixel+'/events',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+token},body:JSON.stringify(payload),signal:AbortSignal.timeout(8000)});const result=await response.json();if(!response.ok||result.error||result.events_received!==1)return reply({error:'meta_rejected_event'},502);try{await record(data,context,env)}catch{return reply({error:'report_storage_unavailable'},503)}return reply({ok:true,event_id:data.event_id})}catch{return reply({error:'meta_unavailable'},502)}
 }}
 export default createHandler();
